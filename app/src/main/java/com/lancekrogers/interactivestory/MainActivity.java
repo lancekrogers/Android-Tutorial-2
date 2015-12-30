@@ -1,5 +1,6 @@
 package com.lancekrogers.interactivestory;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -24,19 +25,23 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
 
-        mNameField = (EditText)findViewById(R.id.nameEditText);
-        mstartButton = (Button)findViewById(R.id.startButton);
+        mNameField = (EditText) findViewById(R.id.nameEditText);
+        mstartButton = (Button) findViewById(R.id.startButton);
 
         mstartButton.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
                 String name = mNameField.getText().toString();
-                Toast.makeText(MainActivity.this, name, Toast.LENGTH_LONG).show();
+                startStory();
+
             }
         });
+    }
 
-
+    private void startStory() {
+        Intent intent = new Intent(this, StoryActivity.class);
+        startActivity(intent);
     }
 
 
