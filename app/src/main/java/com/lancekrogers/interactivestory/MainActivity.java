@@ -15,7 +15,7 @@ import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
-    private EditText mNameField;
+    protected static EditText mNameField;
 
     private Button mstartButton;
 
@@ -33,14 +33,15 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String name = mNameField.getText().toString();
-                startStory();
+                startStory(name);
 
             }
         });
     }
 
-    private void startStory() {
+    private void startStory(String name) {
         Intent intent = new Intent(this, StoryActivity.class);
+        intent.putExtra(getString(R.string.key_name), name);
         startActivity(intent);
     }
 
