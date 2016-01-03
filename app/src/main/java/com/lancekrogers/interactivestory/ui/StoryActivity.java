@@ -7,9 +7,11 @@ import android.util.Log;
 
 import com.lancekrogers.interactivestory.R;
 
+
 public class StoryActivity extends AppCompatActivity {
 
     public static final String TAG = StoryActivity.class.getSimpleName();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,6 +26,7 @@ public class StoryActivity extends AppCompatActivity {
             name = "Friend";
         }
         Log.d(TAG, name);
+
 
 
 
