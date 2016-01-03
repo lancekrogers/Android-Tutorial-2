@@ -34,7 +34,8 @@
         android:id="@+id/startButton"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_below="@+id/nameEditText" />
+        android:layout_below="@+id/nameEditText"
+        style="@style/CustomBlueButton" />
 
     <EditText
         android:layout_width="match_parent"
