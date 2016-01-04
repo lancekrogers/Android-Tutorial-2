@@ -16,6 +16,8 @@ import com.lancekrogers.interactivestory.R;
 import com.lancekrogers.interactivestory.model.Page;
 import com.lancekrogers.interactivestory.model.Story;
 
+import java.util.Random;
+
 
 public class StoryActivity extends AppCompatActivity {
 
@@ -31,6 +33,8 @@ public class StoryActivity extends AppCompatActivity {
 
     private Button mChoice2;
 
+    private String mName;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,28 +42,32 @@ public class StoryActivity extends AppCompatActivity {
         setContentView(R.layout.activity_story);
 
         Intent intent = getIntent();
-        String name = intent.getStringExtra(getString(R.string.key_name));
+        mName = intent.getStringExtra(getString(R.string.key_name));
 
 
-        if (name == null) {
-            name = "Friend";
+        if (mName == null) {
+            mName = "Friend";
         }
-        Log.d(TAG, name);
+        Log.d(TAG, mName);
 
 
         mImageView = (ImageView)findViewById(R.id.storyImageView);
         mTextView = (TextView)findViewById(R.id.storyTextView);
         mChoice1 = (Button)findViewById(R.id.choiceButton1);
         mChoice2 = (Button)findViewById(R.id.choiceButton2);
+        loadPage();
     }
 
     private void loadPage() {
-        Page page = mStory.getPage(0);
-
-        Drawable drawable = ContextCompat.getDrawable(null, page.getImageId());
+        Random randInt = new Random();
+        Page page = mStory.getPage(randInt.nextInt(6));
+        int imageId = page.getImageId();
+        Drawable drawable = ContextCompat.getDrawable(this, imageId);
         mImageView.setImageDrawable(drawable);
-
-        mTextView.setText(page.getText());
+        // Add the users name to the story
+        String pageText = page.getText();
+        pageText = String.format(pageText, mName);
+        mTextView.setText(pageText);
 
         mChoice1.setText(page.getChoice1().getText());
         mChoice2.setText(page.getChoice2().getText());
