@@ -71,25 +71,42 @@ public class StoryActivity extends AppCompatActivity {
         pageText = String.format(pageText, mName);
         mTextView.setText(pageText);
 
-        mChoice1.setText(mCurrentPage.getChoice1().getText());
-        mChoice2.setText(mCurrentPage.getChoice2().getText());
+        if (mCurrentPage.isFinal()) {
+            mChoice2.setVisibility(View.INVISIBLE);
+            mChoice1.setText("Please Play Again");
+            mChoice1.setOnClickListener(new View.OnClickListener() {
 
-        mChoice1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-               int nextPage =  mCurrentPage.getChoice1().getNextPage();
-               loadPage(nextPage);
+                @Override
+                public void onClick(View v) {
+                    finish();
+                }
+            });
 
-            }
-        });
-        mChoice2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                int nextPage = mCurrentPage.getChoice2().getNextPage();
-                loadPage(nextPage);
+        }
+        else {
 
-            }
-        });
+
+            mChoice1.setText(mCurrentPage.getChoice1().getText());
+            mChoice2.setText(mCurrentPage.getChoice2().getText());
+
+            mChoice1.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    int nextPage = mCurrentPage.getChoice1().getNextPage();
+                    loadPage(nextPage);
+
+
+                }
+            });
+            mChoice2.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    int nextPage = mCurrentPage.getChoice2().getNextPage();
+                    loadPage(nextPage);
+
+                }
+            });
+        }
     }
 
 }
